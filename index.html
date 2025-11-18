@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Happy Birthday 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:system-ui;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:#fff;
+  text-align:center;
+  transition: background 0.7s ease;
+}
+
+/* BG per screen */
+body.screen1-bg{
+  background:radial-gradient(circle at top,#ff9ad4,#ff6f9c 40%,#2b001e 100%);
+}
+
+body.screen2-bg{
+  background:radial-gradient(circle at top,#120018,#220021 40%,#05000a 100%);
+}
+
+body.screen3-bg{
+  background:radial-gradient(circle at top,#ffb8d0,#ff9ab8 30%,#f483c3 55%,#2b0118 100%);
+}
+
+.screen{
+  position:relative;
+  z-index:2;
+  width:92%;
+  max-width:420px;
+  display:none;
+  opacity:0;
+  animation:fadeIn .8s forwards ease;
+}
+
+.screen.active{
+  display:block;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* Neon Card (Screen1) */
+.card4{
+  padding:22px 20px;
+  border-radius:20px;
+  background:#1b001b;
+  color:#fff;
+  border:3px solid #ff2fa8;
+  box-shadow:0 0 20px #ff2fa8;
+}
+
+/* Glass Card (Screen3) */
+.glass-card{
+  padding:24px 20px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.14);
+  border:1px solid rgba(255,255,255,0.45);
+  backdrop-filter:blur(16px);
+  box-shadow:0 16px 40px rgba(0,0,0,0.35);
+  color:#ffe6f7;
+}
+
+/* Titles */
+.title{
+  font-size:1.6rem;
+  font-weight:700;
+  margin-bottom:8px;
+  color:#ffb3de;
+}
+
+.name-tag{
+  display:inline-block;
+  padding:6px 16px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#ff6f91,#ffb6c1);
+  color:#fff;
+  font-weight:600;
+  font-size:0.9rem;
+  margin-bottom:10px;
+}
+
+.heart-divider{
+  margin:12px auto 18px;
+  font-size:1.2rem;
+  letter-spacing:0.4rem;
+  color:#ff86c2;
+}
+
+/* Button 3D Push */
+.commonBtn{
+  margin-top:18px;
+  padding:12px 26px;
+  font-size:1rem;
+  font-weight:600;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  display:inline-block;
+  color:white;
+  background:#ff4fa8;
+  transition:.2s;
+}
+
+.btnE{
+  box-shadow:0 6px 0 #b90f59;
+}
+
+.btnE:active{
+  transform:translateY(6px);
+  box-shadow:0 0 0 #b90f59;
+}
+
+/* Lyrics */
+#lyricsBox{
+  margin-top:16px;
+  font-size:1.1rem;
+  line-height:1.7;
+  min-height:80px;
+  color:#ffd3ef;
+  text-shadow:
+    0 0 6px rgba(244,114,182,.8),
+    0 0 12px rgba(236,72,153,.6);
+  opacity:0;
+  transition: opacity .25s ease;
+  white-space:pre-line;
+}
+
+/* Bokeh Overlay (Screen2) */
+#bokehOverlay{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  opacity:0;
+  transition: opacity .7s ease;
+}
+
+body.screen2-bg #bokehOverlay{
+  opacity:1;
+}
+
+#bokehOverlay span{
+  position:absolute;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.25);
+  filter:blur(8px);
+  animation:bokehFloat 12s linear infinite;
+}
+
+@keyframes bokehFloat{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-120vh);}
+}
+
+/* Know box (screen3) */
+.know-box{
+  margin-top:20px;
+  padding:0;
+  border-radius:16px;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.25);
+  backdrop-filter:blur(10px);
+  box-shadow:0 8px 26px rgba(0,0,0,.35);
+  opacity:0;
+  max-height:0;
+  overflow:hidden;
+  transition:.4s ease;
+}
+
+.know-box.show{
+  padding:18px 16px;
+  opacity:1;
+  max-height:500px;
+}
+
+.thanks-text{
+  margin-top:16px;
+  font-size:.9rem;
+  opacity:.9;
+}
+
+.signature{
+  margin-top:20px;
+  font-size:.9rem;
+  opacity:.9;
+}
+
+</style>
+</head>
+
+<body class="screen1-bg">
+
+<audio id="music" src="song.mp3" preload="auto"></audio>
+
+<div id="bokehOverlay"></div>
+
+<!-- SCREEN 1 -->
+<div id="screen1" class="screen active">
+  <div class="card4">
+    <div class="title">🎂 Happy Birthday 💖</div>
+    <div class="name-tag">For You 💘</div>
+    <div class="heart-divider">♡ ♡ ♡</div>
+
+    <p>
+      Hey cutie happiest birthday to you.<br><br>
+      I know this can be made in seconds but trust me,<br>
+      I have done everything with my own hands.<br><br>
+      Please give me some of your precious time.
+    </p>
+
+    <button id="startBtn" class="commonBtn btnE">Let's move →</button>
+
+    <p class="signature">
+      Your wellwisher,<br><b>Pruthvi</b>
+    </p>
+  </div>
+</div>
+
+<!-- SCREEN 2 -->
+<div id="screen2" class="screen">
+  <div class="title">🎂 Happy Birthday 💖</div>
+  <div class="name-tag">For You 💘</div>
+  <div class="heart-divider">♡ ♡ ♡</div>
+
+  <div id="lyricsBox"></div>
+
+  <p class="signature">
+    Your wellwisher,<br><b>Pruthvi</b>
+  </p>
+</div>
+
+<!-- SCREEN 3 -->
+<div id="screen3" class="screen">
+  <div class="glass-card">
+    <div class="title">🎂 Happy Birthday 💖</div>
+    <div class="name-tag">For You 💘</div>
+    <div class="heart-divider">♡ ♡ ♡</div>
+
+    <p class="final-text">
+      Happy Birthday Madam. I'm gonna say remember when everyone are against you,
+      I don't wish though but in case anything goes wrong just remember there's
+      always someone who will be supporting you. Wishing you a peaceful and
+      happy year ahead. 💗
+    </p>
+
+    <button id="knowBtn" class="commonBtn btnE" style="margin-top:22px;">
+      Wanna know me?
+    </button>
+
+    <div id="knowBox" class="know-box">
+      <button id="instaBtn" class="commonBtn btnE" style="background:#ff5fb7;">
+        Instagram →
+      </button>
+
+      <button id="replayBtn" class="commonBtn btnE" style="margin-top:14px;">
+        Replay ⟳
+      </button>
+
+      <p class="thanks-text">
+        Thanks for the time. It meant a lot 😘
+      </p>
+    </div>
+
+    <p class="signature">
+      Your wellwisher,<br><b>Pruthvi</b>
+    </p>
+  </div>
+</div>
+
+<script>
+const body=document.body;
+const music=document.getElementById("music");
+const screen1=document.getElementById("screen1");
+const screen2=document.getElementById("screen2");
+const screen3=document.getElementById("screen3");
+const lyricsBox=document.getElementById("lyricsBox");
+
+const lyricLines=[
+  "Tu Haseen Tera Naam Haseen Ae",
+  "Tere Ishq Da Jaam Haseen Ae",
+  "Eh Be-Matlabi Zindagi",
+  "Jadon Di Tere Naam Haseen Ae",
+  "Tere Ishq Da Jaam Haseen Ae",
+  "Subah Haseen Meri Shaam Haseen Ae",
+  "Eh Be-Matlabi Zindagi Jadon Di Tere Naam",
+  "Tere Ishq Da Jaam Haseen Ae",
+  "Subah Haseen Meri Shaam Haseen Ae",
+  "Eh Be-Matlabi Zindagi Jadon Di Tere Naam"
+];
+
+const lineTimes=[0,3,6,8,11,14,17,22,24,27];
+
+let currentLineIndex=0;
+let timeWatcher=null;
+let typingInterval=null;
+let sequenceTimer=null;
+
+function initBokeh(){
+  const overlay=document.getElementById("bokehOverlay");
+  for(let i=0;i<30;i++){
+    const dot=document.createElement("span");
+    dot.style.left=Math.random()*100+"vw";
+    dot.style.top=Math.random()*100+"vh";
+    dot.style.animationDuration=(8+Math.random()*6)+"s";
+    dot.style.animationDelay=(Math.random()*4)+"s";
+    overlay.appendChild(dot);
+  }
+}
+initBokeh();
+
+function showScreen(n){
+  screen1.classList.remove("active");
+  screen2.classList.remove("active");
+  screen3.classList.remove("active");
+
+  if(n===1){
+    screen1.classList.add("active");
+    body.className="screen1-bg";
+  }else if(n===2){
+    screen2.classList.add("active");
+    body.className="screen2-bg";
+  }else{
+    screen3.classList.add("active");
+    body.className="screen3-bg";
+  }
+}
+
+function typeLine(text){
+  if(typingInterval) clearInterval(typingInterval);
+  lyricsBox.style.opacity=0;
+
+  setTimeout(()=>{
+    lyricsBox.textContent="";
+    let i=0;
+    lyricsBox.style.opacity=1;
+    typingInterval=setInterval(()=>{
+      if(i<text.length){
+        lyricsBox.textContent+=text.charAt(i);
+        i++;
+      } else clearInterval(typingInterval);
+    },120);
+  },150);
+}
+
+function startTimeWatcher(){
+  if(timeWatcher) clearInterval(timeWatcher);
+  currentLineIndex=0;
+
+  timeWatcher=setInterval(()=>{
+    const t=music.currentTime||0;
+
+    if(currentLineIndex < lineTimes.length && t >= lineTimes[currentLineIndex]){
+      typeLine(lyricLines[currentLineIndex]);
+      currentLineIndex++;
+    }
+
+  },100);
+}
+
+function startSequence(){
+  showScreen(2);
+  music.currentTime=0;
+  music.play().catch(()=>{});
+
+  lyricsBox.textContent="";
+  lyricsBox.style.opacity=0;
+
+  startTimeWatcher();
+
+  sequenceTimer=setTimeout(()=>{
+    showScreen(3);
+  },33000);
+}
+
+document.getElementById("startBtn").onclick=()=>startSequence();
+
+/* Know me */
+document.getElementById("knowBtn").onclick=()=>{
+  document.getElementById("knowBox").classList.add("show");
+};
+
+document.getElementById("instaBtn").onclick=()=>{
+  window.open("https://www.instagram.com/lostxishq?igsh=MXYwMm1iMWtnYWVydg==","_blank");
+};
+
+/* Replay */
+document.getElementById("replayBtn").onclick=()=>{
+  if(timeWatcher) clearInterval(timeWatcher);
+  if(typingInterval) clearInterval(typingInterval);
+  if(sequenceTimer) clearTimeout(sequenceTimer);
+
+  lyricsBox.textContent="";
+  lyricsBox.style.opacity=0;
+  music.pause();
+  music.currentTime=0;
+
+  showScreen(1);
+};
+</script>
+
+</body>
+</html>
